@@ -10,10 +10,22 @@ setwd(path)
 # d3 source tree from Mike Bostock
 # https://gist.githubusercontent.com/mbostock/8fe6fa6ed1fa976e5dd76cfa4d816fec/
 
+#------------------------------- filter the dataset---------------------------
 data_icicle = read.csv('icicle_df.csv', stringsAsFactors = FALSE)
 data_icicle$combined = paste(data_icicle$siteid, data_icicle$age_group, data_icicle$sex, sep="/")
 data_icicle=data_icicle[data_icicle$sex != 'All',]
 data_icicle=data_icicle[data_icicle$sex != 'Other',]
+
+# colors
+colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#ABB3B3", "#B31044", "#426878", "#39393B", "#647370",
+           "#96B3AD", "#C5E6DF", "#40615A", "#DDF0E9", "#F2F5F4", "#407362", "#083325")
+
+
+# match those colors to leaf names, matched by index
+labels <- c("France", "Germany", "Italy", "Singapore", "USA", "All countries", "Female", "Male", "80+", "70 - 79",
+            "50 - 69", "26 - 49", "18 - 25", "12 - 17", "6 - 11", "3 - 5", "0 - 2")
+
+
 
 d3_tree <- sunburstR:::csv_to_hier(
   icicle_plot,
@@ -23,7 +35,7 @@ d3_tree <- sunburstR:::csv_to_hier(
 icicle_plot <- data_icicle %>%
   select('combined', 'per_patients')
 
-sb <- sunburst(d3_tree, withD3 = TRUE)
+sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels))
 sb$x$tasks <- list(htmlwidgets::JS("
 function(){
   var chart = this.instance.chart;
