@@ -74,7 +74,7 @@ function(){
 a<- browsable(
   tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
-    tags$button(id='convert-btn',"icicl-ize"),
+    tags$button(id='convert-btn',"Iciclize", style= 'color" #E8E8D3; background-color:#E8E8D3; left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'),
     sb
   ))
 a
