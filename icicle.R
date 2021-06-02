@@ -35,7 +35,7 @@ d3_tree <- sunburstR:::csv_to_hier(
 icicle_plot <- data_icicle %>%
   select('combined', 'per_patients')
 
-sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels))
+sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), width = 600)
 sb$x$tasks <- list(htmlwidgets::JS("
 function(){
   var chart = this.instance.chart;
