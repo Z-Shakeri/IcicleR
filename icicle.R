@@ -25,17 +25,20 @@ colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#ABB3B3", "#B
 labels <- c("France", "Germany", "Italy", "Singapore", "USA", "All countries", "Female", "Male", "80+", "70 - 79",
             "50 - 69", "26 - 49", "18 - 25", "12 - 17", "6 - 11", "3 - 5", "0 - 2")
 
-  
+icicle_plot <- data_icicle %>%
+  select('combined', 'per_patients')
 
 d3_tree <- sunburstR:::csv_to_hier(
   icicle_plot,
   delim = "/"
 )
 
-icicle_plot <- data_icicle %>%
-  select('combined', 'per_patients')
+
 
 sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), width = 650)
+
+
+
 sb$x$tasks <- list(htmlwidgets::JS("
 function(){
   var chart = this.instance.chart;
@@ -51,22 +54,23 @@ function(){
       var interpolate = flubber.interpolate(
         d3.select(this).attr('d'),
         [
-          [d.x0*90, Math.pow(d.y0,1/2)],
-          [d.x0*90, Math.pow(d.y1,1/2)],
-          [d.x1*90, Math.pow(d.y1,1/2)],
-          [d.x1*90, Math.pow(d.y0,1/2)],
-          [d.x0*90, Math.pow(d.y0,1/2)]
+          [d.x0*200, Math.pow(d.y0,1/2)],
+          [d.x0*200, Math.pow(d.y1,1/2)],
+          [d.x1*200, Math.pow(d.y1,1/2)],
+          [d.x1*200, Math.pow(d.y0,1/2)],
+          [d.x0*200, Math.pow(d.y0,1/2)]
         ]
       );
       d3.select(this)
         .transition()
-        .delay(i * 20)
+        .delay(i * 30)
         .duration(200)
-        .attr('transform','translate(-400,-200)')
+        .attr('transform','translate(-200,-200)')
         .attrTween('d', function(d) {return interpolate});
     })
-  })
-}
+  });
+ }
+
 "))
 
 
@@ -74,10 +78,13 @@ function(){
 a<- browsable(
   tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
-    tags$button(id='convert-btn',"Iciclize", style= 'color" #E8E8D3; background-color:#E8E8D3; left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'),
+    tags$button(id='convert-btn',"Iciclize", style= 'color: black; background-color:#E8E8D3; left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'),
     sb
   ))
+
+
 a
 
 #this link will be used in our Dash app
 htmltools::save_html(a, 'index.html')
+
