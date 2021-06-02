@@ -4,7 +4,7 @@ library(plotly)
 library(shiny)
 library(formattable)
 
-path = '/Users/zahrashakeri/Documents/GitHub/EHR-Draft/Lessons/Lesson6/Dash/lesson6'
+path = '/Users/zahrashakeri/Documents/GitHub/IcileR'
 setwd(path)
 
 # d3 source tree from Mike Bostock
