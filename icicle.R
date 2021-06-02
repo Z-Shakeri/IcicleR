@@ -25,7 +25,7 @@ colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#ABB3B3", "#B
 labels <- c("France", "Germany", "Italy", "Singapore", "USA", "All countries", "Female", "Male", "80+", "70 - 79",
             "50 - 69", "26 - 49", "18 - 25", "12 - 17", "6 - 11", "3 - 5", "0 - 2")
 
-
+  
 
 d3_tree <- sunburstR:::csv_to_hier(
   icicle_plot,
