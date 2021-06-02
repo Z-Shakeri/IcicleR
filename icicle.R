@@ -79,4 +79,5 @@ a<- browsable(
   ))
 a
 
+#this link will be used in our Dash app
 htmltools::save_html(a, 'index.html')
