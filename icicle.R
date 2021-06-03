@@ -20,13 +20,13 @@ data_icicle=data_icicle[data_icicle$sex != 'Other',]
 
 
 # colors
-colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#B31044", "#426878", "#39393B", "#647370",
-           "#96B3AD", "#C5E6DF", "#40615A", "#DDF0E9", "#F2F5F4", "#407362", "#083325")
+colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#39393B", "#647370",
+           "#96B3AD", "#C5E6DF", "#40615A", "#DDF0E9", "#F2F5F4", "#407362", "#083325", "#B31044", "#426878")
 
 
 # match those colors to leaf names, matched by index
-labels <- c("France", "Germany", "Italy", "Singapore", "USA",  "Female", "Male", "80+", "70 - 79",
-            "50 - 69", "26 - 49", "18 - 25", "12 - 17", "6 - 11", "3 - 5", "0 - 2")
+labels <- c("France", "Germany", "Italy", "Singapore", "USA", "80+", "70 - 79",
+            "50 - 69", "26 - 49", "18 - 25", "12 - 17", "6 - 11", "3 - 5", "0 - 2", "Female", "Male")
 
 icicle_plot <- data_icicle %>%
   select('combined', 'per_patients')
@@ -38,7 +38,7 @@ d3_tree <- sunburstR:::csv_to_hier(
 
 #To make the legend always checked
 sb<-htmlwidgets::onRender(
-  sunburst(d3_tree, withD3 = TRUE, percent= FALSE, colors = list(range = colors, domain = labels), legend = list(w=100)),
+  sunburst(d3_tree, withD3 = TRUE, percent= FALSE, colors = list(range = colors, domain = labels), legend = list(w=100),legendOrder = labels),
   "
     function(el,x){
     d3.select(el).select('.sunburst-togglelegend').property('checked', true);
