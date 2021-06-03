@@ -35,7 +35,7 @@ d3_tree <- sunburstR:::csv_to_hier(
 
 
 
-sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels))
+sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), legend = list(w=100))
 
 
 
@@ -47,8 +47,8 @@ function(){
   var svg = d3.select(el).select('.sunburst-chart>svg');
 
   var btn = d3.select('#convert-btn')
-  var btn2 = d3.select('#convert-btn2')
-  btn2.on(function(){alert('hello world')})
+  
+  
   btn.on('click.tree', function() {
     var paths = svg.selectAll('path');
     paths.each(function(d,i) {
@@ -78,21 +78,24 @@ function(){
 
 
 
+
+
+
 botton_style= 'color: black; background-color:#E8E8D3;
                 left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'
 
-a<- browsable(
-  tagList(
+a<- browsable(tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
-    tags$button(id='convert-btn',"Iciclize", style= botton_style),
-    tags$button(id='convert-btn2',"Iciclized", style= botton_style),
+    # tags$button(id='convert-btn',"Iciclize", style= botton_style),
+    tags$button(id='convert-btn2',"Iciclized", style= botton_style, onclick="return confirm('Are you sure?');"),
     sb
   ))
 
 
 a
 
-plot <- renderPlot(sb)
+
+
 #this link will be used in our Dash app
 htmltools::save_html(a, 'index.html')
 
