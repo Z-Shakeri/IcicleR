@@ -38,13 +38,16 @@ d3_tree <- sunburstR:::csv_to_hier(
 
 #To make the legend always checked
 sb<-htmlwidgets::onRender(
-  sunburst(d3_tree, withD3 = TRUE, percent= FALSE, colors = list(range = colors, domain = labels), legend = list(w=100),legendOrder = labels),
+  sunburst(d3_tree, withD3 = TRUE,  valueField= 'size', percent= FALSE, count = TRUE, colors = list(range = colors, domain = labels),
+           legend = list(w=100),legendOrder = labels, explanation = "function(d){return d.data.size}"),
   "
     function(el,x){
     d3.select(el).select('.sunburst-togglelegend').property('checked', true);
     d3.select(el).select('.sunburst-legend').style('visibility', '');
     document.getElementsByClassName('sunburst-sidebar')[0].childNodes[2].nodeValue = 'Country/Age/Sex';
-    }
+ }
+    
+    
     "
 )
  
@@ -83,6 +86,7 @@ function(){
         .attrTween('d', function(d) {return interpolate});
     })
   });
+  
 
  }
 
@@ -97,17 +101,15 @@ function(){
 botton_style= 'color: black; background-color:#E8E8D3;
                 left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'
 
-a<- browsable(tagList(
+iframe<- browsable(tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
     tags$button(id='convert-btn',"Iciclize", style= botton_style),
     sb
   ))
-
-
-a
+iframe
 
 
 
 #this link will be used in our Dash app
-htmltools::save_html(a, 'index.html')
+htmltools::save_html(iframe, 'index.html')
 
