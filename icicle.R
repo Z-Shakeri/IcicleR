@@ -35,7 +35,7 @@ d3_tree <- sunburstR:::csv_to_hier(
 
 #To make the legend always checked
 sb<-htmlwidgets::onRender(
-  sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), legend = list(w=100)),
+  sunburst(d3_tree, withD3 = TRUE, percent= FALSE, colors = list(range = colors, domain = labels), legend = list(w=100)),
   "
     function(el,x){
     d3.select(el).select('.sunburst-togglelegend').property('checked', true);
@@ -96,7 +96,7 @@ botton_style= 'color: black; background-color:#E8E8D3;
 a<- browsable(tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
     tags$button(id='convert-btn',"Iciclize", style= botton_style),
-    # tags$button(id='convert-btn2',"Iciclized", style= botton_style, onclick="return confirm('Are you sure?');"),
+    tags$button(id='convert-btn2',"Iciclized", style= botton_style),
     sb
   ))
 
