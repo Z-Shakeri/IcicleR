@@ -35,7 +35,7 @@ d3_tree <- sunburstR:::csv_to_hier(
 
 
 
-sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), width = 650)
+sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels))
 
 
 
@@ -54,18 +54,18 @@ function(){
       var interpolate = flubber.interpolate(
         d3.select(this).attr('d'),
         [
-          [d.x0*200, Math.pow(d.y0,1/2)],
-          [d.x0*200, Math.pow(d.y1,1/2)],
-          [d.x1*200, Math.pow(d.y1,1/2)],
-          [d.x1*200, Math.pow(d.y0,1/2)],
-          [d.x0*200, Math.pow(d.y0,1/2)]
+          [d.x0*120, Math.pow(d.y0,1/2)],
+          [d.x0*120, Math.pow(d.y1,1/2)],
+          [d.x1*120, Math.pow(d.y1,1/2)],
+          [d.x1*120, Math.pow(d.y0,1/2)],
+          [d.x0*120, Math.pow(d.y0,1/2)]
         ]
       );
       d3.select(this)
         .transition()
         .delay(i * 30)
         .duration(200)
-        .attr('transform','translate(-200,-200)')
+        .attr('transform','translate(-400,-200)')
         .attrTween('d', function(d) {return interpolate});
     })
   });
