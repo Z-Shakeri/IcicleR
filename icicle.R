@@ -38,15 +38,16 @@ d3_tree <- sunburstR:::csv_to_hier(
 
 #To make the legend always checked
 sb<-htmlwidgets::onRender(
-  sunburst(d3_tree, withD3 = TRUE,  valueField= 'size', percent= FALSE, count = TRUE, colors = list(range = colors, domain = labels),
+  sunburst(d3_tree, withD3 = TRUE,  valueField= 'size', percent= F, count = TRUE, colors = list(range = colors, domain = labels),
            legend = list(w=100),legendOrder = labels, explanation = "function(d){return d.data.size}"),
   "
     function(el,x){
     d3.select(el).select('.sunburst-togglelegend').property('checked', true);
     d3.select(el).select('.sunburst-legend').style('visibility', '');
     document.getElementsByClassName('sunburst-sidebar')[0].childNodes[2].nodeValue = 'Country/Age/Sex';
- }
-    
+    }
+ 
+ 
     
     "
 )
