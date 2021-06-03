@@ -12,17 +12,20 @@ setwd(path)
 
 #------------------------------- filter the dataset---------------------------
 data_icicle = read.csv('icicle_df.csv', stringsAsFactors = FALSE)
+data_icicle=data_icicle[data_icicle$siteid != 'All countries',]
 data_icicle$combined = paste(data_icicle$siteid, data_icicle$age_group, data_icicle$sex, sep="/")
 data_icicle=data_icicle[data_icicle$sex != 'All',]
 data_icicle=data_icicle[data_icicle$sex != 'Other',]
 
+
+
 # colors
-colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#ABB3B3", "#B31044", "#426878", "#39393B", "#647370",
+colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#B31044", "#426878", "#39393B", "#647370",
            "#96B3AD", "#C5E6DF", "#40615A", "#DDF0E9", "#F2F5F4", "#407362", "#083325")
 
 
 # match those colors to leaf names, matched by index
-labels <- c("France", "Germany", "Italy", "Singapore", "USA", "All countries", "Female", "Male", "80+", "70 - 79",
+labels <- c("France", "Germany", "Italy", "Singapore", "USA",  "Female", "Male", "80+", "70 - 79",
             "50 - 69", "26 - 49", "18 - 25", "12 - 17", "6 - 11", "3 - 5", "0 - 2")
 
 icicle_plot <- data_icicle %>%
@@ -56,7 +59,7 @@ function(){
   var svg = d3.select(el).select('.sunburst-chart>svg');
 
   var btn = d3.select('#convert-btn')
-  
+  var btn2 = d3.select('#convert-btn2')
   
   btn.on('click.tree', function() {
     var paths = svg.selectAll('path');
@@ -80,6 +83,7 @@ function(){
         .attrTween('d', function(d) {return interpolate});
     })
   });
+
  }
 
 "))
@@ -96,7 +100,6 @@ botton_style= 'color: black; background-color:#E8E8D3;
 a<- browsable(tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
     tags$button(id='convert-btn',"Iciclize", style= botton_style),
-    tags$button(id='convert-btn2',"Iciclized", style= botton_style),
     sb
   ))
 
