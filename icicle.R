@@ -34,8 +34,17 @@ d3_tree <- sunburstR:::csv_to_hier(
 )
 
 
-
-sb <- sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), legend = list(w=100))
+sb<-htmlwidgets::onRender(
+  sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), legend = list(w=100)),
+  "
+    function(el,x){
+    d3.select(el).select('.sunburst-togglelegend').property('checked', true);
+    d3.select(el).select('.sunburst-legend').style('visibility', '');
+    document.getElementsByClassName('sunburst-sidebar')[0].childNodes[2].nodeValue = 'Country/Age/Sex';
+    }
+    "
+)
+ 
 
 
 
@@ -86,8 +95,8 @@ botton_style= 'color: black; background-color:#E8E8D3;
 
 a<- browsable(tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
-    # tags$button(id='convert-btn',"Iciclize", style= botton_style),
-    tags$button(id='convert-btn2',"Iciclized", style= botton_style, onclick="return confirm('Are you sure?');"),
+    tags$button(id='convert-btn',"Iciclize", style= botton_style),
+    # tags$button(id='convert-btn2',"Iciclized", style= botton_style, onclick="return confirm('Are you sure?');"),
     sb
   ))
 
