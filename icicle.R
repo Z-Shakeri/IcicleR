@@ -33,7 +33,7 @@ d3_tree <- sunburstR:::csv_to_hier(
   delim = "/"
 )
 
-
+#To make the legend always checked
 sb<-htmlwidgets::onRender(
   sunburst(d3_tree, withD3 = TRUE, colors = list(range = colors, domain = labels), legend = list(w=100)),
   "
