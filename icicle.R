@@ -47,6 +47,8 @@ function(){
   var svg = d3.select(el).select('.sunburst-chart>svg');
 
   var btn = d3.select('#convert-btn')
+  var btn2 = d3.select('#convert-btn2')
+  btn2.on(function(){alert('hello world')})
   btn.on('click.tree', function() {
     var paths = svg.selectAll('path');
     paths.each(function(d,i) {
@@ -63,7 +65,7 @@ function(){
       );
       d3.select(this)
         .transition()
-        .delay(i * 30)
+        .delay(i * 20)
         .duration(200)
         .attr('transform','translate(-400,-200)')
         .attrTween('d', function(d) {return interpolate});
@@ -75,16 +77,22 @@ function(){
 
 
 
+
+botton_style= 'color: black; background-color:#E8E8D3;
+                left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'
+
 a<- browsable(
   tagList(
     tags$head(tags$script(src="https://unpkg.com/flubber")),
-    tags$button(id='convert-btn',"Iciclize", style= 'color: black; background-color:#E8E8D3; left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'),
+    tags$button(id='convert-btn',"Iciclize", style= botton_style),
+    tags$button(id='convert-btn2',"Iciclized", style= botton_style),
     sb
   ))
 
 
 a
 
+plot <- renderPlot(sb)
 #this link will be used in our Dash app
 htmltools::save_html(a, 'index.html')
 
