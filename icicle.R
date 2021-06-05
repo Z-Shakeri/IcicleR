@@ -49,10 +49,13 @@ sb<-htmlwidgets::onRender(
       return d.data.name;
     });
     
+  
+    
     d3.select(el).select('.sunburst-togglelegend').property('checked', true);
     d3.select(el).select('.sunburst-legend').style('visibility', '');
     
-    
+
+
     document.getElementsByClassName('sunburst-sidebar')[0].childNodes[2].nodeValue = 'Country/Age/Sex';
     
     var div = d3.select(el)
@@ -88,10 +91,12 @@ sb<-htmlwidgets::onRender(
 
 sb$x$tasks <- list(htmlwidgets::JS("
 function(){
+  document.getElementsByClassName('sunburst-sequence')[0].childNodes[0].textContent = '11';
   var chart = this.instance.chart;
   var data = this.instance.json;
   var el = this.el;
   var svg = d3.select(el).select('.sunburst-chart>svg');
+  
 
   var btn = d3.select('#convert-btn')
   var btn2 = d3.select('#convert-btn2')
@@ -130,7 +135,7 @@ function(){
 
 
 
-botton_style= 'color: black; background-color:#E8E8D3;
+botton_style= 'color: black; background-color:#E8E8D3; 
                 left: 10%; width: 100px; height: 30px; border-radius: 6px; font-size:90%'
 
 iframe<- browsable(tagList(
