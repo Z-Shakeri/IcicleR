@@ -39,16 +39,23 @@ d3_tree <- sunburstR:::csv_to_hier(
 #To make the legend always checked
 sb<-htmlwidgets::onRender(
   sunburst(d3_tree, withD3 = TRUE,  valueField= 'size', percent= F, count = TRUE, colors = list(range = colors, domain = labels, breadcrumb=list(100,10)),
-           legend = list(w=100),legendOrder = labels, explanation = "function(d){return d.data.size}"),
+           legend = list(w=100),legendOrder = labels, explanation = "function(d){if (d.data.size) return d.data.name + '<br>'+ d.data.size + '%'}"),
   "
-      function(el,x) {
-      var paths = d3.select(el).select('.sunburst-chart')
-      .select('svg')
-      .selectAll('path')
-      .filter(function(d) {
-        return d.data.name;
-      });
-      var div = d3.select(el)
+    function(el,x,d){
+    var paths = d3.select(el).select('.sunburst-chart')
+    .select('svg')
+    .selectAll('path')
+    .filter(function(d) {
+      return d.data.name;
+    });
+    
+    d3.select(el).select('.sunburst-togglelegend').property('checked', true);
+    d3.select(el).select('.sunburst-legend').style('visibility', '');
+    
+    
+    document.getElementsByClassName('sunburst-sidebar')[0].childNodes[2].nodeValue = 'Country/Age/Sex';
+    
+    var div = d3.select(el)
         .append('div')
         .style('position','absolute')
         .style('opacity',0)
@@ -56,8 +63,8 @@ sb<-htmlwidgets::onRender(
         .style('border-radius',5)
         .style('border','1px dotted black')
         .style('background','white')
-        .style('pointer-events','none')
-        .html('hello');
+        .style('pointer-events','none');
+        
       paths.on('mousemove', function(d) {
           div.style('opacity',0.9)
            .html(d.data.name)
@@ -66,10 +73,15 @@ sb<-htmlwidgets::onRender(
         })
         .on('mouseout', function(d) {
           div.style('opacity',0)
-        })
-                
-      }
-      "
+        });
+
+    d3.select(d).select('#percentage').text('Heyyy');
+
+    
+    
+    }
+
+    "
 )
  
 
