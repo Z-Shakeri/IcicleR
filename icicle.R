@@ -53,7 +53,10 @@ sb<-htmlwidgets::onRender(
     
     d3.select(el).select('.sunburst-togglelegend').property('checked', true);
     d3.select(el).select('.sunburst-legend').style('visibility', '');
-    
+ 
+
+    document.getElementsByClassName('sunburst-sequence')[0].childNodes[0].textContent = '';
+    document.getElementsById('sunburst-sequence').style.top = '100';
 
 
     document.getElementsByClassName('sunburst-sidebar')[0].childNodes[2].nodeValue = 'Country/Age/Sex';
@@ -91,7 +94,6 @@ sb<-htmlwidgets::onRender(
 
 sb$x$tasks <- list(htmlwidgets::JS("
 function(){
-  document.getElementsByClassName('sunburst-sequence')[0].childNodes[0].textContent = '11';
   var chart = this.instance.chart;
   var data = this.instance.json;
   var el = this.el;
