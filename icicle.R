@@ -17,7 +17,7 @@ data_icicle$combined = paste(data_icicle$siteid, data_icicle$age_group, data_ici
 data_icicle=data_icicle[data_icicle$sex != 'All',]
 data_icicle=data_icicle[data_icicle$sex != 'Other',]
 
-
+#Need to add facets
 
 # colors
 colors = c("#0072B2", "#E69F00", "#009E73", "#CC79A7", "#D55E00", "#39393B", "#647370",
